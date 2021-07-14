@@ -1,9 +1,23 @@
-orbs:
-  node: circleci/node@4.2.1
+# orbs:
+#   node: circleci/node@4.2.1
+
+# version: 2.1
+
+# workflows:
+#   app-tests:
+#     jobs:
+#       - node/test
 
 version: 2.1
 
 workflows:
-  app-tests:
-    jobs:
-      - node/test
+  test-deploy:
+    - test
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:16.4.1
+    steps:
+      - checkout
+      - run: node --version
